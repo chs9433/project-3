@@ -5,6 +5,6 @@
     <meta charset='utf-8'>
 </head>
 <body>
-    <h1>Foobooks</h1>
+    <h1>Project 3</h1>
 </body>
 </html>
