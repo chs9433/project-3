@@ -45,7 +45,7 @@
                 <span class="dwa15-help-text">Required (1 to 10) </span>
             </div>
         </div>
-        <button class="btn btn-success" type="submit" value="Search" style="float:right;margin:auto;"><i class="fas fa-search-location fa-lg"></i>Search</button>
+        <button class="btn btn-success" type="submit" value="Search" style="float:right;margin:auto;"><i class="fas fa-search-location fa-lg"></i> Search</button>
         <br>
         <br>
         <hr>
