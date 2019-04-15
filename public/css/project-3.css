@@ -35,6 +35,9 @@ hr {
     left:0px;
     overflow:auto;
 }
+#p3-results-container{
+    margin:0px;padding:1px;width:100%;min-height:475px;max-height:475px;overflow:hidden;left:5px;top:-10px;
+}
 
 #divSearchResultsMap {
     display:inline-block;
