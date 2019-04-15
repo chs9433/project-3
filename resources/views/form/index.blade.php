@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+{{-- Includes the main form, table of results, and alert notifications. --}}
     <h2><i class="fas fa-car"></i> {{ $title }}</h2>
     <p>Search for vehicle-specific service stations by address.</p>
     <hr>

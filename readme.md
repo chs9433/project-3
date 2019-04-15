@@ -19,6 +19,6 @@
 +barryvdh/laravel-debugbar
 
 ## Code style divergences
-
+None
 
 ## Notes for instructor

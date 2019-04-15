@@ -14,4 +14,3 @@
 Route::view('/', 'FormController@index');
 Route::get('/', 'FormController@index');
 Route::post('/', 'FormController@searchProcess');
-Route::post('/search', 'FormController@searchProcess');

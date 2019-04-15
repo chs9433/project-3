@@ -8,11 +8,10 @@ use App;
 
 class FormController extends Controller
 {
-    //
-
-
+    # Function to route user to default view/main form
     public function index(REQUEST $request,$title='AutoPilot')
     {
+        # Initialize variables and capture input(s)
         $arrSearchResults=$request->input('arrSearchResults', null);
         $styleResultsDiv = $request->input('styleResultsDiv', 'display: none');
         $styleResultsTable = $request->input('styleResultsTable', 'display: none');
@@ -22,8 +21,8 @@ class FormController extends Controller
         $resultsCount = $request->input('resultsCount', 0);
         $varSearchRadius = $request->input('varSearchRadius', null);
         $srcMap=$request->input('srcMap',null);
-//return view('form.index')->withInput();
 
+        # Route user to appropriate view
         return view('form.index')->with(
             ['title' => $title,
             'styleResultsTable'=>$styleResultsTable,
@@ -36,12 +35,12 @@ class FormController extends Controller
             'resultsCount'=>$resultsCount,
             'srcMap'=>$srcMap
         ]);
+    } //end of 'index' function
 
-    }
-
+    # Function to process user input upon form submission
     public function searchProcess(Request $request,$title='AutoPilot')
     {
-        # Validate the request data
+        # Data Validation Rules
         $validationRules=([
         'varStreetAddress' => 'required|string',
         'varSicCode' => 'required|not_in:0',
@@ -49,6 +48,7 @@ class FormController extends Controller
         'varSearchRadius' => 'required|integer|between:1,10'
         ]);
 
+        # Data Validation Custom Error Messages
         $errorMessages=([
         'varStreetAddress.required' => 'The "Street Address" field is required.',
         'varSicCode.required' => 'The "Vehicle Service Station" field is required.',
@@ -61,21 +61,23 @@ class FormController extends Controller
         'varSearchRadius.integer' => 'The "Search Radius" field must be between 1 and 10 (miles).',
         ]);
 
+        # Make the call to validate inputs
         $request->validate($validationRules,$errorMessages);
 
+        # Initialize a few variables
         $arrGetReq=[];
         $arrSearchResults=[];
         $arrResults=[];
         $jsonSearchResults="";
-
         $varStreetAddress = $request->input('varStreetAddress', null);
         $varZipCode = $request->input('varZipCode', null);
         $varSicCode = $request->input('varSicCode', null);
         $varSearchRadius = $request->input('varSearchRadius', null);
-
         $arrGetReq=$request->all();
         $varMapquestApiKey='IriKNa9PzduxFw0DNM33MWGCwlXgkwqA';
         $varOrigin=$varStreetAddress.',+'.$varZipCode;
+
+        # Array of query data for MapQuest API call.
         $arrData = array('origin'=>$varOrigin,
         'radius'=>$varSearchRadius,
         'maxMatches'=>'10',
@@ -86,17 +88,21 @@ class FormController extends Controller
         );
         $q=http_build_query($arrData);
         $url='https://www.mapquestapi.com/search/v2/radius?'.$q;
+
+        # Make the API call
         $arrResults = json_decode(file_get_contents($url,TRUE));
         $jsonSearchResults = json_encode($arrResults,JSON_PRETTY_PRINT);
         $arrSearchResults = json_decode($jsonSearchResults,true);
 
-
+        # Capture and transform results
         $resultsCount=$arrSearchResults['resultsCount'];
-        $srcMap=NULL;
+        $srcMap=NULL; //Placeholder for locations included with
         $poiLocations='';
         $arrPOIs=array();
         $arrMap=array();
         $srcMap="https://www.mapquestapi.com/staticmap/v4/getmap?";
+
+        # Generate outputs based on result of API call
         if($resultsCount==0)
         {
             $styleResultsDiv='display:initial';
@@ -119,6 +125,7 @@ class FormController extends Controller
                 $poiLocations .= $arrSearchResults['searchResults'][$x]['fields']['lng'].'|';
             }
 
+            # Array with attributes for desired static map (JPEG)
             $arrMap=array(
                 'size'=>'440,435',
                 'key'=>$varMapquestApiKey,
@@ -130,25 +137,24 @@ class FormController extends Controller
                 'traffic'=>'flow',
                 'scalebar'=>'true'
             );
+
+            # Generate the image link that will be used in main view
             $srcMap .=http_build_query($arrMap);
         }
 
-
-        return view('form.index')->with([
-            'title'=>$title,
-            'styleResultsTable'=>$styleResultsTable,
-            'styleResultsDiv'=>$styleResultsDiv,
-            'arrSearchResults'=>$arrSearchResults,
-            'varStreetAddress'=>$varStreetAddress,
-            'varZipCode'=>$varZipCode,
-            'varSicCode'=>$varSicCode,
-            'varSearchRadius'=>$varSearchRadius,
-            'srcMap'=>$srcMap,
-            'arrSearchResults'=>$arrSearchResults,
-            'resultsCount'=>$resultsCount
-        ]);
-
-
-
-    }
-}
+            # Returns view with data required to display any errors, result tables and dynamic map
+            return view('form.index')->with([
+                'title'=>$title,
+                'styleResultsTable'=>$styleResultsTable,
+                'styleResultsDiv'=>$styleResultsDiv,
+                'arrSearchResults'=>$arrSearchResults,
+                'varStreetAddress'=>$varStreetAddress,
+                'varZipCode'=>$varZipCode,
+                'varSicCode'=>$varSicCode,
+                'varSearchRadius'=>$varSearchRadius,
+                'srcMap'=>$srcMap,
+                'arrSearchResults'=>$arrSearchResults,
+                'resultsCount'=>$resultsCount
+            ]);
+    } //end of 'searchProcess' function
+} //end of class

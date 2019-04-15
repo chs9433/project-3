@@ -1,28 +1,34 @@
-body {
+body
+{
   padding:5px 5px;
 }
-.dwa15-img {
+.dwa15-img
+{
   display:block;
   width:200px;
   margin-left:auto;
   margin-right:auto;
   padding:2px;
 }
-.dwa15-card-title {
+.dwa15-card-title
+{
   text-decoration: underline;
 }
-hr {
+hr
+{
   padding:2px;
   padding-top:0px;
   margin-top:1px;
 }
-.dwa15-help-text {
+.dwa15-help-text
+{
     color: red;
     font-weight:bold;
     font-size:10px;
 
 }
-#divSearchResultsTable{
+#divSearchResultsTable
+{
     display:inline-block;
     min-width:60%;
     max-width:60%;
@@ -35,11 +41,12 @@ hr {
     left:0px;
     overflow:auto;
 }
-#p3-results-container{
+#p3-results-container
+{
     margin:0px;padding:1px;width:100%;min-height:475px;max-height:475px;overflow:hidden;left:5px;top:-10px;
 }
-
-#divSearchResultsMap {
+#divSearchResultsMap
+{
     display:inline-block;
     margin:auto;
     padding:10px;
@@ -52,9 +59,8 @@ hr {
     right:0px;
     overflow:auto;
 }
-
-
-#tblSearchResults {
+#tblSearchResults
+{
     align:right;
     vertical-align:middle;
     font-size:x-small;
