@@ -1,5 +1,5 @@
 body {
-  padding:10px 5px;
+  padding:5px 5px;
 }
 .dwa15-img {
   display:block;
@@ -15,4 +15,43 @@ hr {
   padding:2px;
   padding-top:0px;
   margin-top:1px;
+}
+.dwa15-help-text {
+    color: #FFFFFF;
+    font-size:9px;
+
+}
+#divSearchResultsTable{
+    display:inline-block;
+    min-width:60%;
+    max-width:60%;
+    margin:auto;
+    padding:10px;
+    float:left;
+    clear:left;
+    min-height:550px;
+    max-height:550px;
+    left:0px;
+    overflow:auto;
+}
+
+#divSearchResultsMap {
+    display:inline-block;
+    margin:auto;
+    padding:10px;
+    min-width:40%;
+    max-width:40%;
+    min-height:550px;
+    max-height:550px;
+    float:right;
+    clear:right;
+    right:0px;
+    overflow:auto;
+}
+
+
+#tblSearchResults {
+    align:right;
+    vertical-align:middle;
+    font-size:x-small;
 }
