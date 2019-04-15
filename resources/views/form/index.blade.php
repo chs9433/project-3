@@ -28,22 +28,22 @@
           </div>
         </div>
         <div class="form-row">
-        <div class="form-group col-md-8">
-        <label for="varSicCode"><b>Vehicle Service Station</b></label>
-        <select class="form-control" id="varSicCode" name="varSicCode" value="{{ old('varSicCode') }}">
-          <option>---Select---</option>
-          <option value="554101">Gas Station</option>
-          <option value="554112">Electric Charging Station</option>
-          <option value="753201">Auto Body Shop</option>
-          <option value="754201">Car Wash</option>
-        </select>
-        <span class="dwa15-help-text">Required</span>
-        </div>
-        <div class="form-group col-md-4">
-        <label for="varSearchRadius"><b>Search Radius</b></label>
-        <input type="number" class="form-control" id="varSearchRadius" name="varSearchRadius" placeholder="5" value="{{ old('varSearchRadius') }}">
-        <span class="dwa15-help-text">Required (1 to 10) </span>
-        </div>
+            <div class="form-group col-md-8">
+                <label for="varSicCode"><b>Vehicle Service Station</b></label>
+                <select class="form-control" id="varSicCode" name="varSicCode">
+                  <option>---Select---</option>
+                  <option value="554101">Gas Station</option>
+                  <option value="554112">Electric Charging Station</option>
+                  <option value="753201">Auto Body Shop</option>
+                  <option value="754201">Car Wash</option>
+                </select>
+                <span class="dwa15-help-text">Required</span>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="varSearchRadius"><b>Search Radius</b></label>
+                <input type="number" class="form-control" id="varSearchRadius" name="varSearchRadius" placeholder="5" value="{{ old('varSearchRadius') }}">
+                <span class="dwa15-help-text">Required (1 to 10) </span>
+            </div>
         </div>
         <button class="btn btn-success" type="submit" value="Search" style="float:right;margin:auto;"><i class="fas fa-search-location fa-lg"></i>Search</button>
         <br>
