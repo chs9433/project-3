@@ -40,7 +40,7 @@
                 <span class="dwa15-help-text">Required</span>
             </div>
             <div class="form-group col-md-4">
-                <label for="varSearchRadius"><b>Search Radius</b></label>
+                <label for="varSearchRadius"><b>Search Radius (miles)</b></label>
                 <input type="number" class="form-control" id="varSearchRadius" name="varSearchRadius" placeholder="5" value="{{ old('varSearchRadius') }}">
                 <span class="dwa15-help-text">Required (1 to 10) </span>
             </div>
