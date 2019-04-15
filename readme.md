@@ -6,8 +6,8 @@
 + Bootstrap 4.3.1 (CSS):<https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css>
 + MapQuest Search API: <https://developer.mapquest.com/documentation/search-api/v2/>
 + W3 Schools Input Pattern Attribute: <https://www.w3schools.com/tags/att_input_pattern.asp>
-
-
++ Stack Overflow <https://stackoverflow.com/questions/45007905/custom-message-laravel-validation?
+https://stackoverflow.com/questions/45234213/validate-select-form-in-laravel?rq=1
 ## 3 Unique inputs
 1. *Text* to indicate street address
 2. *Dropdown* to indicate desired vehicle service station for query

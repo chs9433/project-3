@@ -2,25 +2,78 @@
 
 namespace App\Http\Controllers;
 
+//use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
 use App;
 
 class FormController extends Controller
 {
     //
-    public function index(REQUEST $request,$title=NULL,$htmlSearchResults=NULL,$tblDisplayStyle='none')
+
+
+    public function index(REQUEST $request,$title='AutoPilot')
     {
-        $title='Vehicle Buddy';
+        $arrSearchResults=$request->input('arrSearchResults', null);
+        $styleResultsDiv = $request->input('styleResultsDiv', 'display: none');
+        $styleResultsTable = $request->input('styleResultsTable', 'display: none');
         $varStreetAddress = $request->input('varStreetAddress', null);
         $varZipCode = $request->input('varZipCode', null);
         $varSicCode = $request->input('varSicCode', null);
+        $resultsCount = $request->input('resultsCount', 0);
         $varSearchRadius = $request->input('varSearchRadius', null);
-        return view('form.index')->with(['title' => $title,'tblDisplayStyle'=>$tblDisplayStyle,'htmlSearchResults'=>$htmlSearchResults,'varStreetAddress'=>$varStreetAddress]);
+        $jsonSearchResults = $request->input('jsonSearchResults', null);
+//return view('form.index')->withInput();
+
+        return view('form.index')->with(
+            ['title' => $title,
+            'styleResultsTable'=>$styleResultsTable,
+            'styleResultsDiv'=>$styleResultsDiv,
+            'arrSearchResults'=>$arrSearchResults,
+            'varStreetAddress'=>$varStreetAddress,
+            'varZipCode'=>$varZipCode,
+            'varSicCode'=>$varSicCode,
+            'varSearchRadius'=>$varSearchRadius,
+            'resultsCount'=>$resultsCount,
+            'jsonSearchResults'=>$jsonSearchResults
+        ]);
+
     }
 
-    public function searchProcess(Request $request,$title=NULL,$tblDisplayStyle='initial')
+    public function searchProcess(Request $request,$title='AutoPilot')
     {
-        $title='Vehicle Buddy';
+
+
+        # Validate the request data
+        $validationRules=([
+        'varStreetAddress' => 'required|string',
+        'varSicCode' => 'required|not_in:0',
+        'varZipCode' => 'required|digits:5',
+        'varSearchRadius' => 'required|integer|between:1,10'
+    ]);
+
+    $errorMessages=([
+    'varStreetAddress.required' => 'The "Street Address" field is required.',
+    'varSicCode.required' => 'The "Vehicle Service Station" field is required.',
+    'varZipCode.required' => 'The "Zip Code" field is required.',
+    'varSearchRadius.required' => 'The "Search Radius" field is required.',
+    'varStreetAddress.string' => 'The "Street Address" must be a string.',
+    'varSicCode.digits:6' => 'The "Vehicle Service Station" field is required.',
+    'varZipCode.digits:5' => 'The "Zip Code" field must be 5 digits (i.e. "12345").',
+    'varSearchRadius.integer' => 'The "Search Radius" field must be an integer.',
+    'varSearchRadius.integer' => 'The "Search Radius" field must be between 1 and 10 (miles).',
+]);
+/*
+        $request->validate([
+        'varStreetAddress' => 'required|string',
+        'varSicCode' => 'required|digits:6',
+        'varZipCode' => 'required|digits:5',
+        'varSearchRadius' => 'required|integer|between:1,10'
+        ]);
+        $request->messages(['varStreetAddress.required' => 'This field is required Chris.']);
+*/
+$request->validate($validationRules,$errorMessages);
+
         $arrGetReq=[];
         $jsonSearchResults=[];
         $arrSearchResults=[];
@@ -55,13 +108,16 @@ class FormController extends Controller
 
         if($resultsCount==0)
         {
-            $htmlSearchResults='<p>No stations found.</p>';
+            $styleResultsDiv='display:initial';
+            $styleResultsTable='display:none';
+            $arrSearchResults=NULL;
+            $htmlSearchResults=NULL;
+            $jsonSearchResults=NULL;
         }
-
         else
         {
-            $boolShowTable=false;
-
+            $styleResultsDiv='display:initial';
+            $styleResultsTable='display:initial';
             for($x=0;$x<$resultsCount;$x++)
             {
                 $htmlSearchResults .='<tr>';
@@ -74,17 +130,26 @@ class FormController extends Controller
                 $htmlSearchResults.='<td>'.$arrSearchResults['searchResults'][$x]['fields']['postal_code'].'</td>';
                 $htmlSearchResults .='<td>'.$arrSearchResults['searchResults'][$x]['fields']['phone'].'</td>';
                 $htmlSearchResults .='</tr>';
+
             }
         }
-        $tblDisplayStyle='initial';
+
 
         return view('form.index')->with(
-            ['title' => $title,
-            'varStreetAddress' =>$varStreetAddress,
+            ['title'=>$title,
+                'styleResultsTable'=>$styleResultsTable,
+            'styleResultsDiv'=>$styleResultsDiv,
+            'arrSearchResults'=>$arrSearchResults,
+            'varStreetAddress'=>$varStreetAddress,
             'varZipCode'=>$varZipCode,
             'varSicCode'=>$varSicCode,
             'varSearchRadius'=>$varSearchRadius,
-            'tblDisplayStyle'=>$tblDisplayStyle,
-            'htmlSearchResults'=>$htmlSearchResults]);
+            'jsonSearchResults'=>$jsonSearchResults,
+            'arrSearchResults'=>$arrSearchResults,
+            'resultsCount'=>$resultsCount
+        ]);
+
+
+
     }
 }
