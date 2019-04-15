@@ -20,10 +20,12 @@
   <div class="form-group col-md-8">
     <label for="varStreetAddress"><b>Street Address</b></label>
     <input type="text" class="form-control" id="varStreetAddress" name="varStreetAddress"  placeholder="1234 Sesame Street" value="{{ old('varStreetAddress') }}">
+    <span class="dwa15-help-text">Required</span>
   </div>
   <div class="form-group col-md-4">
     <label for="varZipCode"><b>Zip Code</b></label>
     <input type="text" class="form-control" id="varZipCode" name="varZipCode" placeholder="12345" value="{{ old('varZipCode') }}">
+    <span class="dwa15-help-text">Required</span>
   </div>
 </div>
 <div class="form-row">
@@ -36,11 +38,12 @@
       <option value="753201">Auto Body Shop</option>
       <option value="754201">Car Wash</option>
     </select>
+    <span class="dwa15-help-text">Required</span>
   </div>
   <div class="form-group col-md-4">
     <label for="varSearchRadius"><b>Search Radius</b></label>
     <input type="number" class="form-control" id="varSearchRadius" name="varSearchRadius" placeholder="5" value="{{ old('varSearchRadius') }}">
-    <span class="dwa15-help-text">Required, 1 to 10 </span>
+    <span class="dwa15-help-text">Required (1 to 10) </span>
   </div>
 </div>
   <button class="btn btn-success" type="submit" value="Search" style="float:right;margin:auto;">

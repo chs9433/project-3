@@ -17,8 +17,9 @@ hr {
   margin-top:1px;
 }
 .dwa15-help-text {
-    color: #FFFFFF;
-    font-size:9px;
+    color: red;
+    font-weight:bold;
+    font-size:10px;
 
 }
 #divSearchResultsTable{
