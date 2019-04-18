@@ -9,6 +9,7 @@
 + W3 Schools Input Pattern Attribute: <https://www.w3schools.com/tags/att_input_pattern.asp>
 + Stack Overflow (Custom Message Laravel Validation) <https://stackoverflow.com/questions/45007905/custom-message-laravel-validation>
 + Stack Overflow (Laravel Select Box Validation) <https://stackoverflow.com/questions/45234213/validate-select-form-in-laravel>
++ Font Awesome 5.8.1 (CSS) <https://use.fontawesome.com/releases/v5.8.1/css/all.css>
 
 ## 3 Unique inputs
 1. *Text* to indicate street address
