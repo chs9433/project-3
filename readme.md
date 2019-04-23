@@ -1,6 +1,6 @@
 # Project 3
 + By: Christopher Sheppard
-+ Production URL: <http://project-3.sheppify.me>
++ Production URL: <http://p3.sheppify.me>
 
 ## Outside resources
 + Bootstrap 4.3.1 (CSS):<https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css>
