@@ -7,7 +7,7 @@
 ## 1. Interface
 I was pleasantly surprised and impressed with the quality of the interface. The form layout is clear and concise with appropriate sizes and placement for most of the headers, helper text, and input labels/controls. The background is a nice touch that certainly reflects the focus of the form. I was also rather impressed with the design of your error and result-specific alerts and felt that they worked notably well; end-users will certainly appreciate error alerts appearing under the affecting input element.
 
-I would recommend updating the UI to make the ‘(required)’ portion of each input label a little more conspicuous to the end-user. This can be done by changing the font weight to bold or changing the font color to red. The ‘Bonus’ checkbox control should align with the preceding questions to align with existing UI design-specific norms. I also suggest adding a ‘reset’ button and changing the alignment of all buttons to the right side of the form.
+I would recommend updating the UI to make the ‘(required)’ portion of each input label a little more conspicuous to the end-user. This can be done by changing the font weight to bold or changing the font color to red. The *‘Bonus’* checkbox control should align with the preceding questions to align with existing UI design-specific norms. I also suggest adding a *‘reset’* button and changing the alignment of all buttons to the right side of the form.
 
 
 
@@ -30,11 +30,11 @@ Your routes file was clear and concise with two explicit routes to your default 
 ## 4. Code: Views
 A majority of your view-specific code looks fine. Template inheritance is used and I found no egregious issues with your Blade syntax. I would recommend removing the *‘welcome.blade.php’* file since your default route points to *math.index*. The **$title** variables from the *‘title’* and *‘content’* sections of your *math.index* view since the variable is not included/referenced in any of your MathController’s methods.
 
-While there are no occurrences of non-display logic, I noticed that your ‘results’ div element consists of multiple if statements based on the ‘operator’ field. I recommend the following as an alternative approach to further simplify the display code in this section:
+While there are no occurrences of non-display logic, I noticed that your ‘results’ div element consists of multiple if statements based on the *‘operator’* field. I recommend the following as an alternative approach to further simplify the display code in this section:
 +	Update the value of your ‘operation’ input field to echo the HTML content (*innerHTML*) of each corresponding input label (i.e. id=’sqrt’ name=’operation’ value=’square root’)
 +	Add a new variable (i.e *‘$operation_value’*)  to your MathController’s process method that holds the result of either **$squareRoot**,**$square**, or **$divisors** based on your existing if statement. Be sure to update your index method with this variable as well.
 +	Reduce the three operator-specific div/alert elements to just one by creating an innerHTML template that can accommodate any operator.
-+  An example is below based on the format of your existing alert messages:
+ +  An example is below based on the format of your existing alert messages:
 ```html
 <div class='alert alert-warning' role='alert'>
     The {{ $operation }} of {{ $userNumber }} is {{ $operation_value }}.
