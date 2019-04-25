@@ -7,55 +7,41 @@
 *Answer the following questions in regards to the student's project you are reviewing. REMOVE THE INSTRUCTIONS FOR EACH PROMPT when complete. We should only see YOUR ANSWERS.*
 
 ## 1. Interface
-Address as many of the following points as applicable:
+I was pleasantly surprised and impressed with the quality of the interface. The form layout is clear and concise with appropriate sizes and placement for most of the headers, helper text, and input labels/controls. The background is a nice touch that certainly reflects the focus of the form. I was also rather impressed with the design of your error and result-specific alerts and felt that they worked notably well; end-users will certainly appreciate error alerts appearing under the affecting input element.
 
-+ What are your initial impressions of the site interface?
-+ Were there any parts of the interface that you found confusing, or did not work as you expected?
-+ Were there any parts of the interface that you thought worked notably well?
-+ Do you have any suggestions for improvements on the interface?
+I would recommend updating the UI to make the ‘(required)’ portion of each input label a little more conspicuous to the end-user. This can be done by changing the font weight to bold or changing the font color to red. The ‘Bonus’ checkbox control should align with the preceding questions to align with existing UI design-specific norms. I also suggest adding a ‘reset’ button and changing the alignment of all buttons to the right side of the form.
+
 
 
 ## 2. Functional testing
-One challenge of developing software is thinking of all the unexpected ways users might interact with our applications. It's easy to develop &ldquo;blinders&rdquo; to methods of interaction because we know so much about *how* our application works, and so we have a hard time imagining how our interfaces might be misinterpreted. Thus, it can be useful to have an outsider rigorously test our applications with the explicit intention of trying to break it.
+Your application’s overall functionality reflects its specified purpose.
+A summary of tested scenarios is below:
+•	Form submission with no inputs
+•	Form submission with only some fields with values.
+•	Form submission with negative and decimal number inputs.
+•	Form submission with number inputs outside of the specified range.
+•	GET requests to non-existent folders/location
 
-Knowing this, it's time to put your reviewee's application to the test. Think of all the unexpected ways their application could be used with the intention of trying to produce some unexpected/undesirable outcome.
-
-Examples...
-+ Try submitting a form without entering any data
-+ Try submitting a form with entering data in only some of the fields
-+ If an input is asking for a number, try entering some of the following combinations: decimal numbers, negative numbers, letters, symbols, an extremely large number, etc.
-+ Try and access a URL on their site that likely does not exist (e.g. http://a3.domain.com/asdjfks)
-+ Etc.
-
-__Summarize what you tried, and describe any unexpected/undesirable outcomes.__
-
-(Even if you don't find any issues, having the reviewee see what you tried might give them insight into things they did not think to test.)
-
+While there are no parts of the interface that confused me, I initially expected the ‘operation’ radio field to auto-select a previous response upon validation failure of the ‘userNumber’ field. Upon further reflection, this may have been difficult given the prohibition of Javascript and/or the potential for confusion about the requirement to pre-fill form fields with problematic data (this can be misconstrued as pre-filling problematic data only upon validation failure).
+I expected the ‘checkForPrime’ checkbox element to be pre-filled upon validation failure of any required form element as well.
 
 
 ## 3. Code: Routes
-Skim through the student's code on Github.
-
-Find their routes file (`routes/web.php`). Thinking about ideal Route/Controller organization&mdash; is there any code in this file that should be happening in a Controller?
-
-If yes, describe.
+Your routes file was clear and concise with two explicit routes to your default page and ‘process’ logic method. The static placeholder for a future view route was a nice inclusion because it demonstrates your understanding of Laravel’s get and view routes – which I imagine can misunderstood by users new to the framework.  I didn’t find any code that should be in your MathController, either.
 
 ## 4. Code: Views
-Skim through the View files in `/resources/views` and address as many of the following points as applicable:
+A majority of your view-specific code looks fine. Template inheritance is used and I found no egregious issues with your Blade syntax. I would recommend removing the ‘welcome.blade.php’ file since your default route points to ‘math.index’. The $title variables from the ‘title’ and ‘content’ sections of your ‘math.index’ view since the variable is not included/referenced in any of your MathController’s methods.
+While there are no occurrences of non-display logic, I noticed that your ‘results’ div element consists of multiple if statements based on the ‘operator’ field. I recommend the following as an alternative approach to further simplify the display code in this section:
+•	Update the value of your ‘operation’ input field to echo the HTML content (innerHTML) of each corresponding input label (i.e. id=’sqrt’ name=’operation’ value=’square root’)
+•	Add a new variable (i.e ‘$operation_value’)  to your MathController’s process method that holds the result of either $squareRoot,$square, or $divisors based on your existing if statement. Be sure to update your index method with this variable as well.
+•	Reduce the three operator-specific div/alert elements to just one by creating an innerHTML template that can accommodate any operator. An example is below based on the format of your existing alert messages:
+<div class='alert alert-warning' role='alert'>
+                        The {{ $operation }} of {{ $userNumber }} is {{ $operation_value }}.
+                    </div>
 
-+ Is template inheritance used?
-+ Are there any separation of concern issues (i.e. non-display specific logic in view files)?
-+ Did they do anything in PHP that could have been done in Blade?
-+ Did they use any Blade syntax/techniques you were unfamiliar with?
 
 ## 5. Code: General
-Address as many of the following points as applicable:
-
-+ Do you notice any inconsistencies between the code and the course notes on [code style](https://github.com/susanBuck/dwa15-fall2018/blob/master/misc/code-style.md)?
-+ Are there any best practices discussed in course material that you feel were not addressed in the code?
-+ Are there aspects of the code that you feel were not self-evident and would benefit from comments?
-+ Are there any parts of the code that you found interesting/would not have thought to do yourself?
-+ Are there any parts of the code that you don't understand?
+I found the code easy to understand and it aligned with the course’s coding style.
 
 ## 6. Misc
-Do you have any additional comments not covered in the above questions?
+Bottom line is that this is a very polished application. The recommendations included in the above-mentioned sections are aimed at improving nuances of the UI. 
